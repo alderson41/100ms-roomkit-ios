@@ -26,6 +26,9 @@ public struct HMSPrebuiltView: View {
         roomModel = HMSRoomModel(roomCode: roomCode, options: options?.roomOptions) { sdk, audioSettingsBuilder, videoSettingsBuilder in
             
             sdk.frameworkInfo = HMSFrameworkInfo(isPrebuilt: true)
+            if #available(iOS 16.0, *) {
+                videoSettingsBuilder.isMultitaskingCameraAccessEnabled = options?.enableMultitaskingCameraAccess ?? false
+            }
             videoSettingsBuilder.initialMuteState = .mute
             audioSettingsBuilder.initialMuteState = .mute
         }
@@ -45,6 +48,9 @@ public struct HMSPrebuiltView: View {
         roomModel = HMSRoomModel(token: token, options: options?.roomOptions) { sdk, audioSettingsBuilder, videoSettingsBuilder  in
             
             sdk.frameworkInfo = HMSFrameworkInfo(isPrebuilt: true)
+            if #available(iOS 16.0, *) {
+                videoSettingsBuilder.isMultitaskingCameraAccessEnabled = options?.enableMultitaskingCameraAccess ?? false
+            }
             videoSettingsBuilder.initialMuteState = .mute
             audioSettingsBuilder.initialMuteState = .mute
         }
